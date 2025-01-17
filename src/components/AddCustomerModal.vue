@@ -28,16 +28,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "vee-validate";
-import { addCustomerSchema } from "../schema/addCustomer.scheama";
 import DialogClose from "./ui/dialog/DialogClose.vue";
+import { addCustomerSchema } from "../schema/addCustomer.schema";
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: addCustomerSchema,
 });
 
+
 const onSubmit = handleSubmit((values) => {
-  console.log(JSON.stringify(values));
-  resetForm();
+  console.log("Form submitted with values:", values);
+  resetForm(); 
+},
+(errors) => {
+  console.error("Validation errors:", errors);
 });
 </script>
 
@@ -59,7 +63,7 @@ const onSubmit = handleSubmit((values) => {
       </DialogHeader>
 
       <form class="py-4 space-y-4"  @submit.prevent="onSubmit">
-        <div class="flex justify-between items-center gap-4">
+        <div class="flex justify-between items-center">
           <FormField name="firstName" v-slot="{ componentField }">
             <FormItem>
               <FormControl>
@@ -145,10 +149,10 @@ const onSubmit = handleSubmit((values) => {
           </FormItem>
         </FormField>
 
-        <FormField name="isActive" v-slot="{ componentField }">
+        <FormField name="isActive" v-slot="{ value, componentField, handleChange  }">
           <FormItem class="flex items-center gap-x-3">
             <FormControl>
-              <Checkbox id="status" v-bind="componentField" />
+              <Checkbox id="status" v-bind="componentField" :checked="value" @update:checked="handleChange" />
             </FormControl>
             <div class="grid gap-1.5 leading-none">
               <label

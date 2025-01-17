@@ -11,6 +11,6 @@ export const addCustomerSchema = toTypedSchema(
       .regex(/^\d{10,14}$/, "Phone number must be between 10 and 14 digits"),
     state: z.string().nonempty("Please select a state"),
     details: z.string(),
-    isActive: z.boolean(),
+    isActive: z.boolean().default(false),
   })
 );

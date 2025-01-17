@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Customer",
-    component: () => import("../views/HomeView.vue"),
+    component: () => import("../views/CustomerView.vue"),
   },
   {
     path: "/settings",
