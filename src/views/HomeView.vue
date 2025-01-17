@@ -18,7 +18,7 @@ type customerDataProp = {
   email: string;
   phone: string;
   state: string;
-  status: string;
+  status: boolean;
   details: string;
 };
 
@@ -30,7 +30,7 @@ const customerData: customerDataProp[] = [
     email: "ugosammy98@gmail.com",
     phone: "08163171496",
     state: "Ebonyi",
-    status: "Active",
+    status: true,
     details: "Frontend Engineer",
   },
 ];
@@ -91,12 +91,12 @@ const customerData: customerDataProp[] = [
               <span
                 class="rounded-full text-white px-4 py-1"
                 :class="[
-                  customer.status === 'Active'
+                  customer.status === true
                     ? 'bg-sycamore-primary'
                     : 'bg-sycamore-secondary',
                 ]"
               >
-                {{ customer.status }}
+                {{ customer.status === true ? 'Active' :'Not Active' }}
               </span>
             </TableCell>
             <TableCell class="font-medium text-xs text-sycamore-secondary">
