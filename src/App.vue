@@ -3,7 +3,6 @@ import { computed } from "vue";
 import AppSidebar from "@/components/Sidebar.vue";
 import { Separator } from "@/components/ui/separator";
 import {
-  Sidebar,
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
@@ -14,7 +13,6 @@ import {
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 
 const greeting = computed(() => {
