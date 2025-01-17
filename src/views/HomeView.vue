@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Search } from "lucide-vue-next";
+import AddCustomerModal from "@/components/AddCustomerModal.vue";
 
 type customerDataProp = {
   id: string;
@@ -56,9 +56,7 @@ const customerData: customerDataProp[] = [
       </div>
 
       <div>
-        <Button class="bg-sycamore-primary text-white font-medium"
-          >Add a Customer</Button
-        >
+          <AddCustomerModal/>
       </div>
     </div>
 
@@ -90,7 +88,14 @@ const customerData: customerDataProp[] = [
             ><TableCell class="font-medium text-xs text-sycamore-secondary">
               {{ customer.state }} </TableCell
             ><TableCell class="font-medium text-xs">
-              <span class="rounded-full text-white px-4 py-1" :class="[customer.status === 'Active'? 'bg-sycamore-primary': 'bg-sycamore-secondary'  ]">
+              <span
+                class="rounded-full text-white px-4 py-1"
+                :class="[
+                  customer.status === 'Active'
+                    ? 'bg-sycamore-primary'
+                    : 'bg-sycamore-secondary',
+                ]"
+              >
                 {{ customer.status }}
               </span>
             </TableCell>
