@@ -2,10 +2,10 @@ import { defineStore } from "pinia";
 
 interface customerDataProp {
   id: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   state: string;
   isActive: boolean;
   details: string;

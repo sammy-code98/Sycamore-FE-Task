@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import AppSidebar from "@/components/Sidebar.vue";
 import { Separator } from "@/components/ui/separator";
+import Toaster from '@/components/ui/toast/Toaster.vue'
 import {
   SidebarProvider,
   SidebarInset,
@@ -53,4 +54,5 @@ const greeting = computed(() => {
       </div>
     </SidebarInset>
   </SidebarProvider>
+    <Toaster />
 </template>

@@ -32,6 +32,11 @@ import DialogClose from "./ui/dialog/DialogClose.vue";
 import { addCustomerSchema } from "../schema/addCustomer.schema";
 import { useCustomerStore } from "../store/useCustomerStore";
 import { v4 as uuidv4 } from "uuid";
+import { ref } from "vue";
+import { toast } from "@/components/ui/toast";
+
+const dialogOpen = ref(false);
+const loading = ref(false);
 
 const customerStore = useCustomerStore();
 
@@ -41,19 +46,30 @@ const { handleSubmit, resetForm } = useForm({
 
 const onSubmit = handleSubmit(
   (values) => {
+    loading.value = true;
     const customerFormData = { id: uuidv4(), ...values };
-    customerStore.addCustomer(customerFormData);
     console.log("Form submitted with values:", values);
-    resetForm();
+
+    setTimeout(() => {
+      customerStore.addCustomer(customerFormData);
+      toast({ description: "Customer added Successfully" });
+      loading.value = false;
+      resetForm();
+      dialogOpen.value = false;
+    }, 5000);
   },
   (errors) => {
+    toast({
+      description: "An Error occured adding a new customer",
+      variant: "destructive",
+    });
     console.error("Validation errors:", errors);
   }
 );
 </script>
 
 <template>
-  <Dialog>
+  <Dialog v-model:open="dialogOpen">
     <DialogTrigger as-child>
       <Button class="bg-sycamore-primary text-white font-medium">
         Add a Customer
@@ -195,12 +211,36 @@ const onSubmit = handleSubmit(
 
           <Button
             type="submit"
-            class="bg-sycamore-primary text-white font-medium"
+            :disabled="loading"
+            class="bg-sycamore-primary text-white font-medium flex items-center gap-2"
           >
-            Add Customer
+            <template v-if="loading">
+              <span class="loader" /> Submitting...
+            </template>
+            <template v-else> Add Customer </template>
           </Button>
         </DialogFooter>
       </form>
     </DialogContent>
   </Dialog>
 </template>
+
+<style scoped>
+.loader {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

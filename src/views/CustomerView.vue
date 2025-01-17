@@ -14,30 +14,6 @@ import { useCustomerStore } from "../store/useCustomerStore";
 import { computed } from "vue";
 
 
-type customerDataProp = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: string;
-  state: string;
-  status: boolean;
-  details: string;
-};
-
-const customerData: customerDataProp[] = [
-  {
-    id: "2der344",
-    firstname: "Samuel",
-    lastname: "Uzor",
-    email: "ugosammy98@gmail.com",
-    phone: "08163171496",
-    state: "Ebonyi",
-    status: true,
-    details: "Frontend Engineer",
-  },
-];
-
 const  customerStore = useCustomerStore()
 
 const customers =  computed(() => customerStore.customers)
