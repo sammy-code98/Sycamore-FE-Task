@@ -30,19 +30,26 @@ import {
 import { useForm } from "vee-validate";
 import DialogClose from "./ui/dialog/DialogClose.vue";
 import { addCustomerSchema } from "../schema/addCustomer.schema";
+import { useCustomerStore } from "../store/useCustomerStore";
+import { v4 as uuidv4 } from "uuid";
+
+const customerStore = useCustomerStore();
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: addCustomerSchema,
 });
 
-
-const onSubmit = handleSubmit((values) => {
-  console.log("Form submitted with values:", values);
-  resetForm(); 
-},
-(errors) => {
-  console.error("Validation errors:", errors);
-});
+const onSubmit = handleSubmit(
+  (values) => {
+    const customerFormData = { id: uuidv4(), ...values };
+    customerStore.addCustomer(customerFormData);
+    console.log("Form submitted with values:", values);
+    resetForm();
+  },
+  (errors) => {
+    console.error("Validation errors:", errors);
+  }
+);
 </script>
 
 <template>
@@ -62,7 +69,7 @@ const onSubmit = handleSubmit((values) => {
         </DialogDescription>
       </DialogHeader>
 
-      <form class="py-4 space-y-4"  @submit.prevent="onSubmit">
+      <form class="py-4 space-y-4" @submit.prevent="onSubmit">
         <div class="flex justify-between items-center">
           <FormField name="firstName" v-slot="{ componentField }">
             <FormItem>
@@ -149,10 +156,18 @@ const onSubmit = handleSubmit((values) => {
           </FormItem>
         </FormField>
 
-        <FormField name="isActive" v-slot="{ value, componentField, handleChange  }">
+        <FormField
+          name="isActive"
+          v-slot="{ value, componentField, handleChange }"
+        >
           <FormItem class="flex items-center gap-x-3">
             <FormControl>
-              <Checkbox id="status" v-bind="componentField" :checked="value" @update:checked="handleChange" />
+              <Checkbox
+                id="status"
+                v-bind="componentField"
+                :checked="value"
+                @update:checked="handleChange"
+              />
             </FormControl>
             <div class="grid gap-1.5 leading-none">
               <label
@@ -171,13 +186,13 @@ const onSubmit = handleSubmit((values) => {
           </FormItem>
         </FormField>
 
-        <DialogFooter  class="pt-6">
+        <DialogFooter class="pt-6">
           <DialogClose as-child>
             <Button class="bg-sycamore-danger text-white px-12 font-medium">
               Cancel
             </Button>
           </DialogClose>
-          
+
           <Button
             type="submit"
             class="bg-sycamore-primary text-white font-medium"

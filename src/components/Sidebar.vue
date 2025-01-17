@@ -29,7 +29,7 @@ import {
   LogOut,
   Settings,
   Sparkles,
-  House,
+  UsersRound,
 } from "lucide-vue-next";
 
 
@@ -45,7 +45,7 @@ const data = {
     {
       title: "Customers",
       url: "/",
-      icon: House,
+      icon: UsersRound,
       isActive: true,
     },
     {

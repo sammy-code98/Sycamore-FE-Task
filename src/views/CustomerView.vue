@@ -10,6 +10,9 @@ import {
 } from "@/components/ui/table";
 import { Search } from "lucide-vue-next";
 import AddCustomerModal from "@/components/AddCustomerModal.vue";
+import { useCustomerStore } from "../store/useCustomerStore";
+import { computed } from "vue";
+
 
 type customerDataProp = {
   id: string;
@@ -34,11 +37,15 @@ const customerData: customerDataProp[] = [
     details: "Frontend Engineer",
   },
 ];
+
+const  customerStore = useCustomerStore()
+
+const customers =  computed(() => customerStore.customers)
 </script>
 
 <template>
   <div class="p-6 space-y-4">
-    <h1 class="text-2xl text-sycamore-secondary font-bold">Customers</h1>
+    <h1 class="text-2xl text-sycamore-secondary font-bold">Customer Overview</h1>
 
     <div class="flex justify-between items-center gap-4">
       <div class="relative w-full max-w-xl items-center">
@@ -75,28 +82,28 @@ const customerData: customerDataProp[] = [
         </TableHeader>
 
         <TableBody>
-          <TableRow v-for="customer in customerData" :key="customer.id">
+          <TableRow v-for="customer in customers" :key="customer.id">
             <TableCell class="font-medium text-xs text-sycamore-secondary">
-              {{ customer.firstname }}
+              {{ customer.firstName }}
             </TableCell>
             <TableCell class="font-medium text-xs text-sycamore-secondary">
-              {{ customer.lastname }} </TableCell
+              {{ customer.lastName }} </TableCell
             ><TableCell class="font-medium text-xs text-sycamore-secondary">
               {{ customer.email }} </TableCell
             ><TableCell class="font-medium text-xs text-sycamore-secondary">
-              {{ customer.phone }} </TableCell
+              {{ customer.phoneNumber }} </TableCell
             ><TableCell class="font-medium text-xs text-sycamore-secondary">
               {{ customer.state }} </TableCell
             ><TableCell class="font-medium text-xs">
               <span
                 class="rounded-full text-white px-4 py-1"
                 :class="[
-                  customer.status === true
+                  customer.isActive === true
                     ? 'bg-sycamore-primary'
                     : 'bg-sycamore-secondary',
                 ]"
               >
-                {{ customer.status === true ? 'Active' :'Not Active' }}
+                {{ customer.isActive === true ? 'Active' :'Not Active' }}
               </span>
             </TableCell>
             <TableCell class="font-medium text-xs text-sycamore-secondary">
