@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -9,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -17,29 +15,21 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import {
-  AudioWaveform,
   BadgeCheck,
   Bell,
   ChevronsUpDown,
-  Command,
   CreditCard,
-  GalleryVerticalEnd,
   LogOut,
   Settings,
   Sparkles,
-  House,
+  UsersRound,
 } from "lucide-vue-next";
 
 
@@ -50,28 +40,12 @@ const data = {
     avatar:
       "https://avatars.githubusercontent.com/u/46542941?s=400&u=f5e304b1b42624aa689c1e74210899e009f2839d&v=4",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
+ 
   navMain: [
     {
-      title: "Home",
+      title: "Customers",
       url: "/",
-      icon: House,
+      icon: UsersRound,
       isActive: true,
     },
     {

@@ -7,8 +7,14 @@ import {
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("../views/HomeView.vue"),
+    name: "Customer",
+    component: () => import("../views/CustomerView.vue"),
+  },
+  {
+    path: "/customers/edit/:id'",
+    name: "EditCustomer",
+    component: () => import("../views/EditCustomer.vue"),
+    props: true,
   },
   {
     path: "/settings",
