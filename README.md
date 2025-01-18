@@ -5,7 +5,7 @@ This project is built as part of a technical interview test for a frontend engin
 
 
 ## Demo
-[SycamoreTestDemo](https://samuel-uzor-rise-test.vercel.app/)
+[SycamoreTestDemo](https://samuel-uzor-sycamorefe.netlify.app/)
 
 
 ## Features
