@@ -13,7 +13,6 @@ import {
   PenLine,
   Search,
   Trash2,
-  Users,
 } from "lucide-vue-next";
 import AddCustomerModal from "@/components/AddCustomerModal.vue";
 import { useCustomerStore } from "../store/useCustomerStore";

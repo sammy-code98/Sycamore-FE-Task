@@ -24,14 +24,6 @@ export const useCustomerStore = defineStore("customerStore", {
         (customer) => customer.id !== customerId
       );
     },
-    // updateCustomer(updatedCustomer: customerDataProp) {
-    //   const index = this.customers.findIndex(
-    //     (customer) => customer.id === updatedCustomer.id
-    //   );
-    //   if (index !== -1) {
-    //     this.customers[index] = updatedCustomer;
-    //   }
-    // },
     updateCustomer(updatedCustomer: customerDataProp) {
       const index = this.customers.findIndex(
         (cust) => cust.id === updatedCustomer.id
