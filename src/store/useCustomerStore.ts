@@ -19,6 +19,27 @@ export const useCustomerStore = defineStore("customerStore", {
     addCustomer(customer: customerDataProp) {
       this.customers.push(customer);
     },
+    deleteCustomer(customerId: string) {
+      this.customers = this.customers.filter(
+        (customer) => customer.id !== customerId
+      );
+    },
+    // updateCustomer(updatedCustomer: customerDataProp) {
+    //   const index = this.customers.findIndex(
+    //     (customer) => customer.id === updatedCustomer.id
+    //   );
+    //   if (index !== -1) {
+    //     this.customers[index] = updatedCustomer;
+    //   }
+    // },
+    updateCustomer(updatedCustomer: customerDataProp) {
+      const index = this.customers.findIndex(
+        (cust) => cust.id === updatedCustomer.id
+      );
+      if (index !== -1) {
+        this.customers[index] = updatedCustomer;
+      }
+    },
   },
   persist: true,
 });

@@ -11,6 +11,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/CustomerView.vue"),
   },
   {
+    path: "/customers/edit/:id'",
+    name: "EditCustomer",
+    component: () => import("../views/EditCustomer.vue"),
+    props: true,
+  },
+  {
     path: "/settings",
     name: "Settings",
     component: () => import("../views/SettingsView.vue"),

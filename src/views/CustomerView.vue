@@ -8,13 +8,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search } from "lucide-vue-next";
+import { EllipsisVertical, PenLine, Search, Trash2 } from "lucide-vue-next";
 import AddCustomerModal from "@/components/AddCustomerModal.vue";
 import { useCustomerStore } from "../store/useCustomerStore";
 import { computed, ref } from "vue";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const searchQuery = ref("");
+
+const openEditPage = (id: string) => {
+  router.push({ name: 'EditCustomer', params: { id } });
+};
+
 
 const customerStore = useCustomerStore();
 
@@ -52,10 +66,7 @@ const filteredCustomers = computed(() => {
 // Paginated customers based on the current page
 const paginatedCustomers = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
-  return filteredCustomers.value.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  return filteredCustomers.value.slice(startIndex, startIndex + itemsPerPage);
 });
 
 // Total pages for pagination
@@ -124,7 +135,10 @@ const goToPage = (page: number) => {
     </div>
 
     <!-- empty state  -->
-    <div v-if="filteredCustomers.length === 0" class="py-6 flex flex-col justify-center items-center space-y-4">
+    <div
+      v-if="filteredCustomers.length === 0"
+      class="py-6 flex flex-col justify-center items-center space-y-4"
+    >
       <p class="text-sycamore-secondary text-lg font-medium">
         No customers found. Add a new customer to get started!
       </p>
@@ -144,7 +158,7 @@ const goToPage = (page: number) => {
             <TableHead>State</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Details</TableHead>
-            
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -176,11 +190,35 @@ const goToPage = (page: number) => {
             <TableCell class="font-medium text-xs text-sycamore-secondary">
               {{ customer.details }}
             </TableCell>
+            <TableCell>
+              <div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger as-child>
+                    <EllipsisVertical class="h-4 w-4 cursor-pointer" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem class="text-sycamore-secondary cursor-pointer"  @click="openEditPage(customer.id)">
+                      <PenLine class="mr-2 h-4 w-4" />
+                      <span>Edit</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      class="text-sycamore-danger cursor-pointer"
+                      color="danger"
+                     @click="customerStore.deleteCustomer(customer.id)"
+
+                    >
+                      <Trash2 class="mr-2 h-4 w-4" />
+                      <span>Delete</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
 
-      
       <div
         v-if="totalPages > 1"
         class="flex justify-end items-center gap-2 mt-4"
@@ -207,4 +245,5 @@ const goToPage = (page: number) => {
       </div>
     </div>
   </div>
+
 </template>
