@@ -19,11 +19,11 @@ import {
 const greeting = computed(() => {
   const hour = new Date().getHours();
   if (hour < 12) {
-    return "Good morning";
+    return "Good Morning";
   } else if (hour < 18) {
-    return "Good afternoon";
+    return "Good Afternoon";
   } else {
-    return "Good evening";
+    return "Good Evening";
   }
 });
 </script>
@@ -40,7 +40,7 @@ const greeting = computed(() => {
           <Separator orientation="vertical" class="mr-2 h-4" />
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem class="hidden md:block">
+              <BreadcrumbItem class="md:block">
                 <BreadcrumbLink class="font-bold text-sycamore-secondary">
                   Hey {{ greeting }} !
                 </BreadcrumbLink>
