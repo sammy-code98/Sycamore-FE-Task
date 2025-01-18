@@ -226,7 +226,7 @@ const goToPage = (page: number) => {
               <TableCell
                 class="font-medium text-xs text-sycamore-secondary whitespace-nowrap"
               >
-                {{ customer.details }}
+                    {{ customer.details.length > 30 ? customer.details.slice(0, 30) + '...' : customer.details }}
               </TableCell>
               <TableCell class="whitespace-nowrap">
                 <div>
